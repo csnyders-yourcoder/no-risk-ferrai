@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Technical Analysis Visual Hub</title>
+
+<script src="https://cdn.jsdelivr.net/npm/plotly.js@2.27.0/dist/plotly.min.js"></script>
+
+<style>
+
+/* ===== GLOBAL ===== */
+
+:root{
+  --primary:#667eea;
+  --secondary:#764ba2;
+  --buy:#4CAF50;
+  --sell:#F44336;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  padding:20px;
+}
+
+/* ===== CONTAINER ===== */
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  background:white;
+  border-radius:15px;
+  padding:30px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.2);
+}
+
+/* ===== NAV ===== */
+
+nav{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+nav button{
+  padding:10px 20px;
+  margin:5px;
+  border:none;
+  border-radius:8px;
+  background:var(--primary);
+  color:white;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+nav button:hover{
+  opacity:0.8;
+}
+
+/* ===== HEADERS ===== */
+
+h1{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.section{
+  margin-top:40px;
+}
+
+.chart{
+  height:400px;
+}
+
+/* ===== TAGS ===== */
+
+.tag{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:15px;
+  color:white;
+  margin-top:10px;
+}
+
+.buy{ background:var(--buy); }
+.sell{ background:var(--sell); }
+
+/* ===== MOBILE ===== */
+
+@media(max-width:768px){
+  .container{padding:15px;}
+  h1{font-size:22px;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📊 Technical Analysis Visual Hub</h1>
+
+<nav>
+<button onclick="scrollToSection('engulfing')">Engulfing</button>
+<button onclick="scrollToSection('breakout')">Breakout</button>
+<button onclick="scrollToSection('trend')">Trend</button>
+</nav>
+
+<!-- ================= ENGULFING ================= -->
+
+<div id="engulfing" class="section">
+<h2>Bullish Engulfing Pattern</h2>
+
+<div id="engulfingChart" class="chart"></div>
+
+<p class="tag buy">BUY SIGNAL</p>
+</div>
+
+<!-- ================= BREAKOUT ================= -->
+
+<div id="breakout" class="section">
+<h2>Range Breakout Example</h2>
+
+<div id="breakoutChart" class="chart"></div>
+
+<p class="tag buy">BREAKOUT BUY</p>
+</div>
+
+<!-- ================= TREND ================= -->
+
+<div id="trend" class="section">
+<h2>Trend Example</h2>
+
+<div id="trendChart" class="chart"></div>
+
+<p class="tag buy">UPTREND</p>
+</div>
+
+</div>
+
+<script>
+
+/* ================= NAV SCROLL ================= */
+
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+/* ================= DATA GENERATOR ================= */
+
+function generateCandles(count,startPrice){
+
+  let dates=[],open=[],high=[],low=[],close=[];
+  let price=startPrice;
+
+  for(let i=0;i<count;i++){
+
+    let change=(Math.random()-0.5)*0.003;
+    let newClose=price+change;
+
+    dates.push(new Date(2024,0,i+1));
+    open.push(price);
+    close.push(newClose);
+    high.push(Math.max(price,newClose)+0.001);
+    low.push(Math.min(price,newClose)-0.001);
+
+    price=newClose;
+  }
+
+  return {dates,open,high,low,close,price};
+}
+
+/* ================= ENGULFING CHART ================= */
+
+let engulf = generateCandles(35,1.1000);
+
+engulf.dates.push(new Date(2024,0,36));
+engulf.open.push(engulf.price);
+engulf.close.push(engulf.price-0.002);
+engulf.high.push(engulf.price+0.001);
+engulf.low.push(engulf.price-0.003);
+
+engulf.dates.push(new Date(2024,0,37));
+engulf.open.push(engulf.price-0.001);
+engulf.close.push(engulf.price+0.004);
+engulf.high.push(engulf.price+0.005);
+engulf.low.push(engulf.price-0.002);
+
+Plotly.newPlot("engulfingChart",[{
+  x:engulf.dates,
+  open:engulf.open,
+  high:engulf.high,
+  low:engulf.low,
+  close:engulf.close,
+  type:"candlestick"
+}],{xaxis:{rangeslider:{visible:false}}});
+
+/* ================= BREAKOUT CHART ================= */
+
+let breakout = generateCandles(30,1.2000);
+
+/* Create sideways range */
+for(let i=0;i<10;i++){
+
+  breakout.dates.push(new Date(2024,1,i+1));
+  breakout.open.push(1.205);
+  breakout.close.push(1.205+(Math.random()-0.5)*0.001);
+  breakout.high.push(1.207);
+  breakout.low.push(1.203);
+}
+
+/* Breakout candle */
+breakout.dates.push(new Date(2024,1,12));
+breakout.open.push(1.206);
+breakout.close.push(1.215);
+breakout.high.push(1.217);
+breakout.low.push(1.205);
+
+Plotly.newPlot("breakoutChart",[{
+  x:breakout.dates,
+  open:breakout.open,
+  high:breakout.high,
+  low:breakout.low,
+  close:breakout.close,
+  type:"candlestick"
+}],{xaxis:{rangeslider:{visible:false}}});
+
+/* ================= TREND CHART ================= */
+
+let trendDates=[],trendOpen=[],trendHigh=[],trendLow=[],trendClose=[];
+let price=1.050;
+
+for(let i=0;i<40;i++){
+
+  let change=0.001+Math.random()*0.001;
+  let newClose=price+change;
+
+  trendDates.push(new Date(2024,2,i+1));
+  trendOpen.push(price);
+  trendClose.push(newClose);
+  trendHigh.push(newClose+0.001);
+  trendLow.push(price-0.001);
+
+  price=newClose;
+}
+
+Plotly.newPlot("trendChart",[{
+  x:trendDates,
+  open:trendOpen,
+  high:trendHigh,
+  low:trendLow,
+  close:trendClose,
+  type:"candlestick"
+}],{xaxis:{rangeslider:{visible:false}}});
+
+</script>
+
+</body>
+</html>
