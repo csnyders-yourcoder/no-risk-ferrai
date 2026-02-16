@@ -1,302 +1,1078 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Forex Pattern Education Hub</title>
-
-<script src="https://cdn.jsdelivr.net/npm/plotly.js@2.27.0/dist/plotly.min.js"></script>
-
-<style>
-
-body{
-font-family:Arial;
-background:linear-gradient(135deg,#667eea,#764ba2);
-padding:20px;
-}
-
-.container{
-background:white;
-padding:30px;
-border-radius:15px;
-max-width:1200px;
-margin:auto;
-}
-
-.chart{ height:400px; margin-top:20px;}
-
-.infoBox{
-padding:20px;
-border-radius:12px;
-margin-top:20px;
-}
-
-.blue{background:#d8ecff;}
-.purple{background:#f3d8ff;}
-.green{background:#d8ffd8;}
-.orange{background:#ffe7c4;}
-
-.badge{
-display:inline-block;
-padding:6px 14px;
-border-radius:20px;
-color:white;
-font-weight:bold;
-margin-right:10px;
-}
-
-.buy{background:#4CAF50;}
-.sell{background:#F44336;}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete MT5 Indicators Setup Guide - Forex Trading</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+        h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 40px 0 20px 0;
+            font-size: 28px;
+        }
+        h3 {
+            color: #2c3e50;
+            font-size: 22px;
+            margin: 25px 0 15px 0;
+            padding-left: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .section {
+            background: #f8f9fa;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border: 2px solid #e0e0e0;
+        }
+        .indicator-card {
+            background: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+        }
+        .how-to-add {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 20px;
+            border-left: 5px solid #2196F3;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        .settings-box {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            padding: 20px;
+            border-left: 5px solid #9C27B0;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        .best-for {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 20px;
+            border-left: 5px solid #4CAF50;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        .warning {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe082 100%);
+            padding: 20px;
+            border-left: 5px solid #ffc107;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        .pro-tip {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+            padding: 20px;
+            border-left: 5px solid #e91e63;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        ul, ol {
+            margin-left: 25px;
+            margin-top: 10px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        tr:hover {
+            background: #f5f5f5;
+        }
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin: 3px;
+        }
+        .tag-trend { background: #e3f2fd; color: #1565c0; border: 2px solid #1565c0; }
+        .tag-momentum { background: #f3e5f5; color: #6a1b9a; border: 2px solid #6a1b9a; }
+        .tag-volatility { background: #fff3e0; color: #e65100; border: 2px solid #e65100; }
+        .tag-volume { background: #e8f5e9; color: #2e7d32; border: 2px solid #2e7d32; }
+        .tag-beginner { background: #c8e6c9; color: #1b5e20; border: 2px solid #1b5e20; }
+        .tag-intermediate { background: #fff9c4; color: #f57f17; border: 2px solid #f57f17; }
+        .tag-advanced { background: #ffcdd2; color: #c62828; border: 2px solid #c62828; }
+        .step {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            font-weight: 500;
+        }
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #c7254e;
+        }
+        .screenshot-note {
+            background: #eceff1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 2px dashed #607d8b;
+            text-align: center;
+            color: #455a64;
+            font-style: italic;
+        }
+        .combo-box {
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 3px solid #ffa726;
+        }
+        .combo-box h4 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
-
 <body>
+    <div class="container">
+        <h1>🎯 Complete MT5 Indicators Setup Guide</h1>
+        <p class="subtitle">Essential Indicators for Forex Trading Success</p>
 
-<div class="container">
+        <h2>📱 Part 1: MT5 Basics - Getting Started</h2>
+        <div class="section">
+            <h3>How to Add ANY Indicator in MT5</h3>
+            <div class="how-to-add">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    Open MT5 and select a currency pair chart (e.g., EURUSD)
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    Click <strong>"Insert"</strong> in the top menu → <strong>"Indicators"</strong>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    You'll see categories:
+                    <ul>
+                        <li><strong>Trend</strong> - Moving Averages, MACD, etc.</li>
+                        <li><strong>Oscillators</strong> - RSI, Stochastic, etc.</li>
+                        <li><strong>Volumes</strong> - Volume indicators</li>
+                        <li><strong>Bill Williams</strong> - Alligator, Fractals, etc.</li>
+                        <li><strong>Custom</strong> - Downloaded indicators</li>
+                    </ul>
+                </div>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    Select your indicator → Set parameters → Click <strong>"OK"</strong>
+                </div>
+                <div class="step">
+                    <span class="step-number">5</span>
+                    Indicator appears on your chart!
+                </div>
+            </div>
 
-<h1>📊 Forex Pattern Learning Hub</h1>
+            <h3>⌨️ Quick Shortcuts</h3>
+            <table>
+                <tr>
+                    <th>Action</th>
+                    <th>Shortcut</th>
+                </tr>
+                <tr>
+                    <td>Insert Indicator</td>
+                    <td><code>Ctrl + I</code> (opens Indicators list)</td>
+                </tr>
+                <tr>
+                    <td>Remove All Indicators</td>
+                    <td>Right-click chart → <code>Indicators List</code> → Select all → <code>Delete</code></td>
+                </tr>
+                <tr>
+                    <td>Edit Indicator Settings</td>
+                    <td>Right-click on indicator → <code>Properties</code></td>
+                </tr>
+                <tr>
+                    <td>Change Timeframe</td>
+                    <td><code>M1, M5, M15, H1, H4, D1, W1</code> buttons in toolbar</td>
+                </tr>
+            </table>
+        </div>
 
-<!-- ===================== ENGULFING ===================== -->
+        <h2>📊 Part 2: Essential Trend Indicators</h2>
 
-<h2>Bullish Engulfing Pattern at Support</h2>
-<div id="engulfChart" class="chart"></div>
+        <div class="indicator-card">
+            <h3>1. Moving Averages (EMA/SMA)</h3>
+            <div>
+                <span class="tag tag-trend">TREND</span>
+                <span class="tag tag-beginner">BEGINNER</span>
+            </div>
 
-<div class="infoBox blue">
-<h3>📖 What You're Seeing</h3>
-<ul>
-<li><b>Bullish Engulfing:</b> Two candle reversal pattern at end of downtrend</li>
-<li><b>First Candle:</b> Small bearish candle</li>
-<li><b>Second Candle:</b> Strong bullish candle engulfing previous candle</li>
-<li><b>Signal:</b> Buyers overpower sellers</li>
-</ul>
-</div>
+            <div class="how-to-add">
+                <strong>📍 How to Add:</strong>
+                <p>Insert → Indicators → <strong>Trend</strong> → <strong>Moving Average</strong></p>
+            </div>
 
-<div class="infoBox purple">
-<h3>📈 Trading Setup</h3>
+            <div class="settings-box">
+                <strong>⚙️ Recommended Settings for Beginners:</strong>
+                <table>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Setting</th>
+                        <th>Explanation</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Period</strong></td>
+                        <td>20, 50, 200</td>
+                        <td>Add THREE MAs with these periods</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MA Method</strong></td>
+                        <td>Exponential (EMA)</td>
+                        <td>Reacts faster to price changes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apply to</strong></td>
+                        <td>Close</td>
+                        <td>Based on closing prices</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Color - 20 EMA</strong></td>
+                        <td>Blue</td>
+                        <td>Fast MA</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Color - 50 EMA</strong></td>
+                        <td>Red</td>
+                        <td>Medium MA</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Color - 200 EMA</strong></td>
+                        <td>Black/Dark Gray</td>
+                        <td>Slow MA (overall trend)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Width</strong></td>
+                        <td>2</td>
+                        <td>Makes lines visible</td>
+                    </tr>
+                </table>
+            </div>
 
-<p><span class="badge buy">BUY</span> After engulfing candle closes</p>
-<p><b>Entry:</b> Break above engulf candle high</p>
-<p><b>Stop Loss:</b> Below engulf candle low</p>
-<p><b>Take Profit:</b> 1:2 Risk Reward</p>
+            <div class="best-for">
+                <strong>✅ Best For:</strong>
+                <ul>
+                    <li>Identifying trend direction</li>
+                    <li>Entry signals on crossovers</li>
+                    <li>Dynamic support/resistance</li>
+                    <li>All timeframes (especially H4, D1)</li>
+                </ul>
+            </div>
 
-</div>
+            <div class="pro-tip">
+                <strong>💡 Pro Trading Tips:</strong>
+                <ul>
+                    <li><strong>Golden Cross:</strong> 20 EMA crosses above 50 EMA = BUY</li>
+                    <li><strong>Death Cross:</strong> 20 EMA crosses below 50 EMA = SELL</li>
+                    <li><strong>200 EMA Rule:</strong> If price above 200 EMA = uptrend, below = downtrend</li>
+                    <li><strong>Bounce Trade:</strong> Buy when price touches 20/50 EMA in uptrend</li>
+                </ul>
+            </div>
+        </div>
 
-<div class="infoBox green">
-<h3>✅ Why This Works</h3>
-<ul>
-<li>Momentum shift from sellers to buyers</li>
-<li>Shows strong institutional buying</li>
-<li>Often forms at support zones</li>
-</ul>
-</div>
+        <div class="indicator-card">
+            <h3>2. Bollinger Bands</h3>
+            <div>
+                <span class="tag tag-volatility">VOLATILITY</span>
+                <span class="tag tag-beginner">BEGINNER</span>
+            </div>
 
-<div class="infoBox orange">
-<h3>⚠️ False Signals</h3>
-<ul>
-<li>Occurs in sideways market</li>
-<li>Weak candle body</li>
-<li>Low trading volume</li>
-</ul>
-</div>
+            <div class="how-to-add">
+                <strong>📍 How to Add:</strong>
+                <p>Insert → Indicators → <strong>Trend</strong> → <strong>Bollinger Bands</strong></p>
+            </div>
 
-<hr>
+            <div class="settings-box">
+                <strong>⚙️ Recommended Settings:</strong>
+                <table>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Setting</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Period</strong></td>
+                        <td>20 (standard)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deviation</strong></td>
+                        <td>2 (standard)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apply to</strong></td>
+                        <td>Close</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Middle Line Color</strong></td>
+                        <td>Blue (20 SMA)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Upper/Lower Bands</strong></td>
+                        <td>Red (dashed lines work well)</td>
+                    </tr>
+                </table>
+            </div>
 
-<!-- ===================== DOUBLE BOTTOM ===================== -->
+            <div class="best-for">
+                <strong>✅ Best For:</strong>
+                <ul>
+                    <li>Identifying overbought/oversold conditions</li>
+                    <li>Volatility breakouts (squeeze patterns)</li>
+                    <li>Range trading</li>
+                    <li>Works on H1, H4, D1</li>
+                </ul>
+            </div>
 
-<h2>Double Bottom Pattern</h2>
-<div id="doubleBottomChart" class="chart"></div>
+            <div class="pro-tip">
+                <strong>💡 Trading Signals:</strong>
+                <ul>
+                    <li><strong>Bollinger Squeeze:</strong> Bands narrow = big move coming</li>
+                    <li><strong>Touch Upper Band:</strong> Potentially overbought in ranging market</li>
+                    <li><strong>Touch Lower Band:</strong> Potentially oversold in ranging market</li>
+                    <li><strong>Walking the Band:</strong> In strong trends, price "walks" along upper/lower band</li>
+                </ul>
+            </div>
+        </div>
 
-<div class="infoBox blue">
-<h3>📖 What You're Seeing</h3>
-<ul>
-<li>Two equal lows showing strong support</li>
-<li>Market fails to break support twice</li>
-<li>Indicates reversal potential</li>
-</ul>
-</div>
+        <div class="indicator-card">
+            <h3>3. Parabolic SAR</h3>
+            <div>
+                <span class="tag tag-trend">TREND</span>
+                <span class="tag tag-intermediate">INTERMEDIATE</span>
+            </div>
 
-<div class="infoBox purple">
-<h3>📈 Trading Setup</h3>
+            <div class="how-to-add">
+                <strong>📍 How to Add:</strong>
+                <p>Insert → Indicators → <strong>Trend</strong> → <strong>Parabolic SAR</strong></p>
+            </div>
 
-<p><span class="badge buy">BUY</span> On neckline breakout</p>
-<p><b>Entry:</b> Above neckline resistance</p>
-<p><b>Stop Loss:</b> Below second bottom</p>
-<p><b>Take Profit:</b> Height of pattern projected upward</p>
+            <div class="settings-box">
+                <strong>⚙️ Recommended Settings:</strong>
+                <table>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Setting</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Step</strong></td>
+                        <td>0.02</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Maximum</strong></td>
+                        <td>0.20</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Color (dots below price)</strong></td>
+                        <td>Green (bullish)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Color (dots above price)</strong></td>
+                        <td>Red (bearish)</td>
+                    </tr>
+                </table>
+            </div>
 
-</div>
+            <div class="best-for">
+                <strong>✅ Best For:</strong>
+                <ul>
+                    <li>Trailing stop losses</li>
+                    <li>Trend following</li>
+                    <li>Exit signals</li>
+                    <li>Strong trending markets</li>
+                </ul>
+            </div>
 
-<div class="infoBox green">
-<h3>✅ Why This Works</h3>
-<ul>
-<li>Shows seller exhaustion</li>
-<li>Strong support level confirmed</li>
-<li>Breakout attracts momentum traders</li>
-</ul>
-</div>
+            <div class="pro-tip">
+                <strong>💡 How to Read:</strong>
+                <ul>
+                    <li><strong>Dots Below Price:</strong> Uptrend, hold LONG positions</li>
+                    <li><strong>Dots Above Price:</strong> Downtrend, hold SHORT positions</li>
+                    <li><strong>Dots Flip:</strong> Trend reversal, exit and reverse position</li>
+                    <li><strong>Trailing Stop:</strong> Move stop to SAR dot level</li>
+                </ul>
+            </div>
+        </div>
 
-<hr>
+        <h2>📈 Part 3: Essential Momentum/Oscillator Indicators</h2>
 
-<!-- ===================== BREAKOUT ===================== -->
+        <div class="indicator-card">
+            <h3>4. RSI (Relative Strength Index)</h3>
+            <div>
+                <span class="tag tag-momentum">MOMENTUM</span>
+                <span class="tag tag-beginner">BEGINNER</span>
+            </div>
 
-<h2>Range Breakout</h2>
-<div id="breakoutChart" class="chart"></div>
+            <div class="how-to-add">
+                <strong>📍 How to Add:</strong>
+                <p>Insert → Indicators → <strong>Oscillators</strong> → <strong>Relative Strength Index</strong></p>
+            </div>
 
-<div class="infoBox blue">
-<h3>📖 What You're Seeing</h3>
-<ul>
-<li>Market moving sideways inside support & resistance</li>
-<li>Strong breakout candle leaving range</li>
-</ul>
-</div>
+            <div class="settings-box">
+                <strong>⚙️ Recommended Settings:</strong>
+                <table>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Setting</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Period</strong></td>
+                        <td>14 (standard)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apply to</strong></td>
+                        <td>Close</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Levels</strong></td>
+                        <td>Add levels at: 70, 50, 30</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Line Color</strong></td>
+                        <td>Purple or Blue</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Line Width</strong></td>
+                        <td>2</td>
+                    </tr>
+                </table>
+            </div>
 
-<div class="infoBox purple">
-<h3>📈 Trading Setup</h3>
+            <div class="best-for">
+                <strong>✅ Best For:</strong>
+                <ul>
+                    <li>Identifying overbought/oversold levels</li>
+                    <li>Divergence trading (advanced)</li>
+                    <li>Momentum confirmation</li>
+                    <li>Works on all timeframes</li>
+                </ul>
+            </div>
 
-<p><span class="badge buy">BUY</span> On breakout close</p>
-<p><b>Entry:</b> Above resistance level</p>
-<p><b>Stop Loss:</b> Inside range</p>
-<p><b>Take Profit:</b> Measured range expansion</p>
+            <div class="pro-tip">
+                <strong>💡 Trading Rules:</strong>
+                <ul>
+                    <li><strong>Above 70:</strong> Overbought - watch for reversal down</li>
+                    <li><strong>Below 30:</strong> Oversold - watch for reversal up</li>
+                    <li><strong>Cross Above 30:</strong> Buy signal (momentum turning bullish)</li>
+                    <li><strong>Cross Below 70:</strong> Sell signal (momentum turning bearish)</li>
+                    <li><strong>Above 50:</strong> Bullish momentum overall</li>
+                    <li><strong>Below 50:</strong> Bearish momentum overall</li>
+                </ul>
+            </div>
 
-</div>
+            <div class="warning">
+                <strong>⚠️ Warning:</strong> In strong trends, RSI can stay overbought (>70) or oversold (<30) for extended periods. Don't blindly sell when RSI > 70 in strong uptrend!
+            </div>
+        </div>
 
-<div class="infoBox green">
-<h3>✅ Why This Works</h3>
-<ul>
-<li>Liquidity build up inside range</li>
-<li>Breakout triggers stop losses & new buyers</li>
-</ul>
-</div>
+        <div class="indicator-card">
+            <h3>5. MACD (Moving Average Convergence Divergence)</h3>
+            <div>
+                <span class="tag tag-momentum">MOMENTUM</span>
+                <span class="tag tag-trend">TREND</span>
+                <span class="tag tag-intermediate">INTERMEDIATE</span>
+            </div>
 
-</div>
+            <div class="how-to-add">
+                <strong>📍 How to Add:</strong>
+                <p>Insert → Indicators → <strong>Oscillators</strong> → <strong>MACD</strong></p>
+            </div>
 
-<script>
+            <div class="settings-box">
+                <strong>⚙️ Recommended Settings:</strong>
+                <table>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Setting</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Fast EMA</strong></td>
+                        <td>12</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Slow EMA</strong></td>
+                        <td>26</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MACD SMA</strong></td>
+                        <td>9 (Signal Line)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apply to</strong></td>
+                        <td>Close</td>
+                    </tr>
+                    <tr>
+                        <td><strong>MACD Line Color</strong></td>
+                        <td>Blue</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Signal Line Color</strong></td>
+                        <td>Red</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Histogram</strong></td>
+                        <td>Gray/Green-Red bars</td>
+                    </tr>
+                </table>
+            </div>
 
-/* ===== REALISTIC FOREX DATA ===== */
+            <div class="best-for">
+                <strong>✅ Best For:</strong>
+                <ul>
+                    <li>Trend direction and momentum</li>
+                    <li>Crossover signals</li>
+                    <li>Divergence trading</li>
+                    <li>H4 and Daily timeframes</li>
+                </ul>
+            </div>
 
-function generateTrend(start,trend,count){
+            <div class="pro-tip">
+                <strong>💡 Trading Signals:</strong>
+                <ul>
+                    <li><strong>MACD Crosses Above Signal:</strong> Bullish signal (BUY)</li>
+                    <li><strong>MACD Crosses Below Signal:</strong> Bearish signal (SELL)</li>
+                    <li><strong>Above Zero Line:</strong> Bullish momentum</li>
+                    <li><strong>Below Zero Line:</strong> Bearish momentum</li>
+                    <li><strong>Histogram Growing:</strong> Increasing momentum</li>
+                    <li><strong>Histogram Shrinking:</strong> Weakening momentum</li>
+                </ul>
+            </div>
+        </div>
 
-let dates=[],open=[],high=[],low=[],close=[];
-let price=start;
+        <div class="indicator-card">
+            <h3>6. Stochastic Oscillator</h3>
+            <div>
+                <span class="tag tag-momentum">MOMENTUM</span>
+                <span class="tag tag-intermediate">INTERMEDIATE</span>
+            </div>
 
-for(let i=0;i<count;i++){
+            <div class="how-to-add">
+                <strong>📍 How to Add:</strong>
+                <p>Insert → Indicators → <strong>Oscillators</strong> → <strong>Stochastic Oscillator</strong></p>
+            </div>
 
-let move = trend + (Math.random()-0.5)*0.001;
+            <div class="settings-box">
+                <strong>⚙️ Recommended Settings:</strong>
+                <table>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Setting</th>
+                    </tr>
+                    <tr>
+                        <td><strong>%K Period</strong></td>
+                        <td>14</td>
+                    </tr>
+                    <tr>
+                        <td><strong>%D Period</strong></td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Slowing</strong></td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Levels</strong></td>
+                        <td>80, 20</td>
+                    </tr>
+                    <tr>
+                        <td><strong>%K Line (Main)</strong></td>
+                        <td>Blue</td>
+                    </tr>
+                    <tr>
+                        <td><strong>%D Line (Signal)</strong></td>
+                        <td>Red</td>
+                    </tr>
+                </table>
+            </div>
 
-let newClose = price + move;
+            <div class="best-for">
+                <strong>✅ Best For:</strong>
+                <ul>
+                    <li>Overbought/oversold conditions</li>
+                    <li>Crossover signals in extreme zones</li>
+                    <li>Range-bound markets</li>
+                    <li>Lower timeframes (M15, H1)</li>
+                </ul>
+            </div>
 
-dates.push(new Date(2024,0,i+1));
-open.push(price);
-close.push(newClose);
-high.push(Math.max(price,newClose)+0.0008);
-low.push(Math.min(price,newClose)-0.0008);
+            <div class="pro-tip">
+                <strong>💡 Trading Signals:</strong>
+                <ul>
+                    <li><strong>Below 20 + %K crosses above %D:</strong> Strong BUY</li>
+                    <li><strong>Above 80 + %K crosses below %D:</strong> Strong SELL</li>
+                    <li><strong>Both lines above 80:</strong> Overbought</li>
+                    <li><strong>Both lines below 20:</strong> Oversold</li>
+                </ul>
+            </div>
+        </div>
 
-price=newClose;
-}
+        <div class="indicator-card">
+            <h3>7. Average True Range (ATR)</h3>
+            <div>
+                <span class="tag tag-volatility">VOLATILITY</span>
+                <span class="tag tag-intermediate">INTERMEDIATE</span>
+            </div>
 
-return {dates,open,high,low,close,price};
-}
+            <div class="how-to-add">
+                <strong>📍 How to Add:</strong>
+                <p>Insert → Indicators → <strong>Oscillators</strong> → <strong>Average True Range</strong></p>
+            </div>
 
-/* ================= ENGULFING ================= */
+            <div class="settings-box">
+                <strong>⚙️ Recommended Settings:</strong>
+                <table>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Setting</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Period</strong></td>
+                        <td>14</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Color</strong></td>
+                        <td>Orange or Yellow</td>
+                    </tr>
+                </table>
+            </div>
 
-let engulf = generateTrend(1.100,-0.001,30);
+            <div class="best-for">
+                <strong>✅ Best For:</strong>
+                <ul>
+                    <li>Setting stop loss distances</li>
+                    <li>Measuring volatility</li>
+                    <li>Position sizing</li>
+                    <li>Not a directional signal!</li>
+                </ul>
+            </div>
 
-/* Bear candle */
-engulf.dates.push(new Date(2024,1,1));
-engulf.open.push(engulf.price);
-engulf.close.push(engulf.price-0.001);
-engulf.high.push(engulf.price+0.0005);
-engulf.low.push(engulf.price-0.002);
+            <div class="pro-tip">
+                <strong>💡 How to Use:</strong>
+                <ul>
+                    <li><strong>Stop Loss Placement:</strong> Set SL at 1.5-2x ATR from entry</li>
+                    <li><strong>Take Profit:</strong> Set TP at 2-3x ATR from entry</li>
+                    <li><strong>High ATR:</strong> More volatility, wider stops needed</li>
+                    <li><strong>Low ATR:</strong> Less volatility, tighter stops possible</li>
+                    <li><strong>Example:</strong> EUR/USD ATR = 50 pips → Set SL at 75-100 pips</li>
+                </ul>
+            </div>
+        </div>
 
-/* Bull engulf */
-engulf.dates.push(new Date(2024,1,2));
-engulf.open.push(engulf.price-0.0005);
-engulf.close.push(engulf.price+0.003);
-engulf.high.push(engulf.price+0.004);
-engulf.low.push(engulf.price-0.001);
+        <h2>📊 Part 4: Volume & Advanced Indicators</h2>
 
-Plotly.newPlot("engulfChart",[{
-x:engulf.dates,
-open:engulf.open,
-high:engulf.high,
-low:engulf.low,
-close:engulf.close,
-type:"candlestick"
-}],{xaxis:{rangeslider:{visible:false}}});
+        <div class="indicator-card">
+            <h3>8. Volume (Tick Volume in MT5)</h3>
+            <div>
+                <span class="tag tag-volume">VOLUME</span>
+                <span class="tag tag-beginner">BEGINNER</span>
+            </div>
 
-/* ================= DOUBLE BOTTOM ================= */
+            <div class="how-to-add">
+                <strong>📍 How to Add:</strong>
+                <p>Insert → Indicators → <strong>Volumes</strong> → <strong>Volumes</strong></p>
+            </div>
 
-let db = generateTrend(1.200,-0.001,20);
+            <div class="settings-box">
+                <strong>⚙️ Recommended Settings:</strong>
+                <table>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Setting</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Apply to</strong></td>
+                        <td>Tick Volume</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Up Volume Color</strong></td>
+                        <td>Green</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Down Volume Color</strong></td>
+                        <td>Red</td>
+                    </tr>
+                </table>
+            </div>
 
-/* Bottom 1 */
-db.dates.push(new Date(2024,1,10));
-db.open.push(1.180);
-db.close.push(1.182);
-db.high.push(1.185);
-db.low.push(1.178);
+            <div class="best-for">
+                <strong>✅ Best For:</strong>
+                <ul>
+                    <li>Confirming breakouts</li>
+                    <li>Identifying strong vs weak moves</li>
+                    <li>Volume spikes indicate important levels</li>
+                </ul>
+            </div>
 
-/* Pullback */
-db.dates.push(new Date(2024,1,12));
-db.open.push(1.185);
-db.close.push(1.190);
-db.high.push(1.192);
-db.low.push(1.184);
+            <div class="pro-tip">
+                <strong>💡 Volume Analysis:</strong>
+                <ul>
+                    <li><strong>High Volume + Breakout:</strong> Strong, reliable breakout</li>
+                    <li><strong>Low Volume + Breakout:</strong> Weak, may fail (false breakout)</li>
+                    <li><strong>Volume Spike:</strong> Important news or event happening</li>
+                    <li><strong>Declining Volume in Trend:</strong> Trend may be ending</li>
+                </ul>
+            </div>
+        </div>
 
-/* Bottom 2 */
-db.dates.push(new Date(2024,1,14));
-db.open.push(1.182);
-db.close.push(1.183);
-db.high.push(1.186);
-db.low.push(1.179);
+        <div class="indicator-card">
+            <h3>9. Fibonacci Retracement</h3>
+            <div>
+                <span class="tag tag-trend">TREND</span>
+                <span class="tag tag-intermediate">INTERMEDIATE</span>
+            </div>
 
-/* Breakout */
-db.dates.push(new Date(2024,1,18));
-db.open.push(1.190);
-db.close.push(1.205);
-db.high.push(1.208);
-db.low.push(1.188);
+            <div class="how-to-add">
+                <strong>📍 How to Add:</strong>
+                <p>Click <strong>"Insert"</strong> → <strong>"Objects"</strong> → <strong>"Fibonacci"</strong> → <strong>"Fibonacci Retracement"</strong></p>
+                <p>OR use toolbar button with Fibonacci symbol</p>
+            </div>
 
-Plotly.newPlot("doubleBottomChart",[{
-x:db.dates,
-open:db.open,
-high:db.high,
-low:db.low,
-close:db.close,
-type:"candlestick"
-}],{xaxis:{rangeslider:{visible:false}}});
+            <div class="settings-box">
+                <strong>⚙️ How to Draw:</strong>
+                <ol>
+                    <li><strong>Uptrend:</strong> Click on swing LOW, drag to swing HIGH</li>
+                    <li><strong>Downtrend:</strong> Click on swing HIGH, drag to swing LOW</li>
+                    <li>Key levels appear: 23.6%, 38.2%, 50%, 61.8%, 78.6%</li>
+                </ol>
+                <strong>Important Levels to Watch:</strong>
+                <ul>
+                    <li><strong>38.2%:</strong> Shallow pullback in strong trend</li>
+                    <li><strong>50%:</strong> Psychological level, common reversal point</li>
+                    <li><strong>61.8%:</strong> "Golden Ratio" - most important level</li>
+                </ul>
+            </div>
 
-/* ================= RANGE BREAKOUT ================= */
+            <div class="best-for">
+                <strong>✅ Best For:</strong>
+                <ul>
+                    <li>Finding entry points in trending markets</li>
+                    <li>Identifying potential reversal zones</li>
+                    <li>Setting take profit levels</li>
+                    <li>Works best on H4 and Daily</li>
+                </ul>
+            </div>
 
-let rb = generateTrend(1.300,0,15);
+            <div class="pro-tip">
+                <strong>💡 Trading Strategy:</strong>
+                <ul>
+                    <li>Wait for price to pull back to 50% or 61.8% level</li>
+                    <li>Look for reversal candle pattern at Fib level</li>
+                    <li>Enter in direction of original trend</li>
+                    <li>Stop loss below next Fib level</li>
+                    <li>Take profit at previous high/low or extension levels</li>
+                </ul>
+            </div>
+        </div>
 
-/* Sideways range */
-for(let i=0;i<10;i++){
+        <div class="indicator-card">
+            <h3>10. Ichimoku Cloud (Advanced)</h3>
+            <div>
+                <span class="tag tag-trend">TREND</span>
+                <span class="tag tag-advanced">ADVANCED</span>
+            </div>
 
-rb.dates.push(new Date(2024,2,i+1));
-rb.open.push(1.305);
-rb.close.push(1.305+(Math.random()-0.5)*0.0008);
-rb.high.push(1.308);
-rb.low.push(1.302);
-}
+            <div class="how-to-add">
+                <strong>📍 How to Add:</strong>
+                <p>Insert → Indicators → <strong>Trend</strong> → <strong>Ichimoku Kinko Hyo</strong></p>
+            </div>
 
-/* Breakout */
-rb.dates.push(new Date(2024,2,15));
-rb.open.push(1.307);
-rb.close.push(1.320);
-rb.high.push(1.323);
-rb.low.push(1.306);
+            <div class="settings-box">
+                <strong>⚙️ Standard Settings:</strong>
+                <table>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Setting</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Tenkan-sen</strong></td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kijun-sen</strong></td>
+                        <td>26</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Senkou Span B</strong></td>
+                        <td>52</td>
+                    </tr>
+                </table>
+            </div>
 
-Plotly.newPlot("breakoutChart",[{
-x:rb.dates,
-open:rb.open,
-high:rb.high,
-low:rb.low,
-close:rb.close,
-type:"candlestick"
-}],{xaxis:{rangeslider:{visible:false}}});
+            <div class="best-for">
+                <strong>✅ Best For:</strong>
+                <ul>
+                    <li>Complete market view (trend, momentum, support/resistance)</li>
+                    <li>Experienced traders</li>
+                    <li>H4 and Daily timeframes</li>
+                </ul>
+            </div>
 
-</script>
+            <div class="pro-tip">
+                <strong>💡 Simple Ichimoku Rules:</strong>
+                <ul>
+                    <li><strong>Price Above Cloud:</strong> Uptrend - look for buys</li>
+                    <li><strong>Price Below Cloud:</strong> Downtrend - look for sells</li>
+                    <li><strong>Price In Cloud:</strong> Consolidation - no trade</li>
+                    <li><strong>Tenkan crosses above Kijun:</strong> Buy signal</li>
+                    <li><strong>Tenkan crosses below Kijun:</strong> Sell signal</li>
+                </ul>
+            </div>
 
+            <div class="warning">
+                <strong>⚠️ For Beginners:</strong> Ichimoku looks complex! Start with simpler indicators first. Come back to this after 3-6 months of trading experience.
+            </div>
+        </div>
+
+        <h2>🎯 Part 5: Beginner-Friendly Indicator Combinations</h2>
+
+        <div class="combo-box">
+            <h4>🔰 Combo #1: Simple Trend Following (Best for Beginners)</h4>
+            <strong>Indicators:</strong>
+            <ul>
+                <li>20 EMA (Blue)</li>
+                <li>50 EMA (Red)</li>
+                <li>RSI (14)</li>
+            </ul>
+            <strong>Strategy:</strong>
+            <ol>
+                <li>Wait for 20 EMA to cross above 50 EMA (Golden Cross)</li>
+                <li>Confirm RSI is above 50 (bullish momentum)</li>
+                <li>BUY when price pulls back to 20 EMA</li>
+                <li>Stop loss below 50 EMA</li>
+                <li>Take profit at 1:2 risk-reward ratio</li>
+            </ol>
+        </div>
+
+        <div class="combo-box">
+            <h4>📊 Combo #2: Support/Resistance + Confirmation</h4>
+            <strong>Indicators:</strong>
+            <ul>
+                <li>Draw Support/Resistance Lines (horizontal lines)</li>
+                <li>RSI (14)</li>
+                <li>MACD</li>
+                <li>Volume</li>
+            </ul>
+            <strong>Strategy:</strong>
+            <ol>
+                <li>Identify key support level</li>
+                <li>Wait for price to touch support</li>
+                <li>RSI should be below 30 (oversold)</li>
+                <li>Wait for MACD to cross up (bullish)</li>
+                <li>Check for volume spike (confirmation)</li>
+                <li>BUY with all confirmations</li>
+                <li>Stop loss below support</li>
+            </ol>
+        </div>
+
+        <div class="combo-box">
+            <h4>⚡ Combo #3: Momentum Breakout</h4>
+            <strong>Indicators:</strong>
+            <ul>
+                <li>Bollinger Bands (20, 2)</li>
+                <li>RSI (14)</li>
+                <li>Volume</li>
+            </ul>
+            <strong>Strategy:</strong>
+            <ol>
+                <li>Identify Bollinger Band Squeeze (bands very tight)</li>
+                <li>Wait for price to break above/below bands</li>
+                <li>RSI should confirm direction (>50 for buy, <50 for sell)</li>
+                <li>Volume should spike on breakout</li>
+                <li>Enter in breakout direction</li>
+                <li>Stop loss at middle band</li>
+                <li>Ride the trend using Parabolic SAR for trailing stop</li>
+            </ol>
+        </div>
+
+        <h2>⚙️ Part 6: Chart Setup Recommendations</h2>
+
+        <div class="section">
+            <h3>🎨 Clean Chart Setup for Day Trading</h3>
+            <div class="settings-box">
+                <strong>Timeframe:</strong> H1 or H4<br>
+                <strong>Indicators on Main Chart:</strong>
+                <ul>
+                    <li>20 EMA (Blue, Width 2)</li>
+                    <li>50 EMA (Red, Width 2)</li>
+                    <li>Bollinger Bands (Optional)</li>
+                </ul>
+                <strong>Indicators in Separate Windows Below:</strong>
+                <ul>
+                    <li>RSI (14) - First window below chart</li>
+                    <li>MACD (12, 26, 9) - Second window</li>
+                    <li>Volume - Third window (optional)</li>
+                </ul>
+            </div>
+
+            <h3>📅 Clean Chart Setup for Swing Trading</h3>
+            <div class="settings-box">
+                <strong>Timeframe:</strong> H4 or Daily<br>
+                <strong>Indicators on Main Chart:</strong>
+                <ul>
+                    <li>50 EMA (Blue, Width 2)</li>
+                    <li>200 EMA (Black, Width 2)</li>
+                    <li>Support/Resistance Lines (draw manually)</li>
+                </ul>
+                <strong>Indicators in Separate Windows:</strong>
+                <ul>
+                    <li>RSI (14)</li>
+                    <li>ATR (14) - for stop loss calculation</li>
+                </ul>
+            </div>
+
+            <div class="warning">
+                <strong>⚠️ Less is More!</strong>
+                <p>Don't add 10+ indicators to your chart. You'll get confused and analysis paralysis. Stick to 3-5 maximum. Master a simple system first!</p>
+            </div>
+        </div>
+
+        <h2>📝 Part 7: Saving Your Indicator Setup</h2>
+
+        <div class="section">
+            <div class="how-to-add">
+                <strong>How to Save Your Chart Template:</strong>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    Set up your chart with all your favorite indicators
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    Right-click on chart → <strong>"Template"</strong> → <strong>"Save Template"</strong>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    Name it (e.g., "My Trading Setup")
+                </div>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    Click <strong>"Save"</strong>
+                </div>
+            </div>
+
+            <div class="pro-tip">
+                <strong>💡 To Apply Template to New Charts:</strong>
+                <p>Right-click any chart → <strong>"Template"</strong> → Select your saved template</p>
+                <p>All your indicators will automatically load!</p>
+            </div>
+        </div>
+
+        <h2>🚀 Part 8: Next Steps</h2>
+
+        <div class="section">
+            <h3>Your Learning Path:</h3>
+            <ol style="font-size: 16px; line-height: 2;">
+                <li><strong>Week 1-2:</strong> Add only Moving Averages (20, 50, 200 EMA) to your charts. Learn to identify trends.</li>
+                <li><strong>Week 3-4:</strong> Add RSI. Practice identifying overbought/oversold conditions.</li>
+                <li><strong>Week 5-6:</strong> Add MACD. Look for crossover signals with MA and RSI confirmation.</li>
+                <li><strong>Week 7-8:</strong> Add Bollinger Bands or one more indicator of choice.</li>
+                <li><strong>Week 9-12:</strong> Practice your 3-4 indicator system on DEMO account daily.</li>
+                <li><strong>Month 4+:</strong> Once profitable on demo for 3 months, start with small live account.</li>
+            </ol>
+
+            <div class="warning">
+                <strong>⚠️ Critical Reminder:</strong>
+                <ul>
+                    <li>NO indicator works 100% of the time</li>
+                    <li>Indicators are tools, not crystal balls</li>
+                    <li>Risk management is MORE important than indicators</li>
+                    <li>Never risk more than 1-2% per trade</li>
+                    <li>ALWAYS use stop losses</li>
+                    <li>Practice on demo for AT LEAST 3 months</li>
+                </ul>
+            </div>
+
+            <div class="pro-tip">
+                <strong>💡 Final Pro Tips:</strong>
+                <ul>
+                    <li>Start simple - master 2-3 indicators before adding more</li>
+                    <li>Higher timeframes (H4, Daily) give more reliable signals</li>
+                    <li>Combine trend + momentum + volume for best results</li>
+                    <li>Keep a trading journal noting which setups work best</li>
+                    <li>Never trade based on ONE indicator alone</li>
+                    <li>When in doubt, stay out - patience is key</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; margin-top: 40px; text-align: center;">
+            <h2 style="color: white; margin-top: 0;">🎓 You're Now Ready to Start!</h2>
+            <p style="font-size: 18px; line-height: 1.8;">
+                You have all the essential indicators and know how to use them.<br>
+                Start with a simple setup, practice on demo, and gradually build your skills.<br>
+                Remember: Successful trading is 20% indicators and 80% risk management + psychology!
+            </p>
+            <p style="font-size: 22px; font-weight: bold; margin-top: 20px;">
+                Good luck on your trading journey! 🚀
+            </p>
+        </div>
+    </div>
 </body>
 </html>
