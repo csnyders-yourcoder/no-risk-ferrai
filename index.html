@@ -4,100 +4,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Technical Analysis Visual Hub</title>
+<title>Forex Pattern Education Hub</title>
 
 <script src="https://cdn.jsdelivr.net/npm/plotly.js@2.27.0/dist/plotly.min.js"></script>
 
 <style>
 
-/* ===== GLOBAL ===== */
-
-:root{
-  --primary:#667eea;
-  --secondary:#764ba2;
-  --buy:#4CAF50;
-  --sell:#F44336;
-}
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
 body{
-  font-family:Arial, sans-serif;
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  padding:20px;
+font-family:Arial;
+background:linear-gradient(135deg,#667eea,#764ba2);
+padding:20px;
 }
-
-/* ===== CONTAINER ===== */
 
 .container{
-  max-width:1200px;
-  margin:auto;
-  background:white;
-  border-radius:15px;
-  padding:30px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.2);
+background:white;
+padding:30px;
+border-radius:15px;
+max-width:1200px;
+margin:auto;
 }
 
-/* ===== NAV ===== */
+.chart{ height:400px; margin-top:20px;}
 
-nav{
-  text-align:center;
-  margin-bottom:25px;
+.infoBox{
+padding:20px;
+border-radius:12px;
+margin-top:20px;
 }
 
-nav button{
-  padding:10px 20px;
-  margin:5px;
-  border:none;
-  border-radius:8px;
-  background:var(--primary);
-  color:white;
-  cursor:pointer;
-  font-weight:bold;
+.blue{background:#d8ecff;}
+.purple{background:#f3d8ff;}
+.green{background:#d8ffd8;}
+.orange{background:#ffe7c4;}
+
+.badge{
+display:inline-block;
+padding:6px 14px;
+border-radius:20px;
+color:white;
+font-weight:bold;
+margin-right:10px;
 }
 
-nav button:hover{
-  opacity:0.8;
-}
-
-/* ===== HEADERS ===== */
-
-h1{
-  text-align:center;
-  margin-bottom:20px;
-}
-
-.section{
-  margin-top:40px;
-}
-
-.chart{
-  height:400px;
-}
-
-/* ===== TAGS ===== */
-
-.tag{
-  display:inline-block;
-  padding:6px 12px;
-  border-radius:15px;
-  color:white;
-  margin-top:10px;
-}
-
-.buy{ background:var(--buy); }
-.sell{ background:var(--sell); }
-
-/* ===== MOBILE ===== */
-
-@media(max-width:768px){
-  .container{padding:15px;}
-  h1{font-size:22px;}
-}
+.buy{background:#4CAF50;}
+.sell{background:#F44336;}
 
 </style>
 </head>
@@ -106,159 +56,244 @@ h1{
 
 <div class="container">
 
-<h1>📊 Technical Analysis Visual Hub</h1>
+<h1>📊 Forex Pattern Learning Hub</h1>
 
-<nav>
-<button onclick="scrollToSection('engulfing')">Engulfing</button>
-<button onclick="scrollToSection('breakout')">Breakout</button>
-<button onclick="scrollToSection('trend')">Trend</button>
-</nav>
+<!-- ===================== ENGULFING ===================== -->
 
-<!-- ================= ENGULFING ================= -->
+<h2>Bullish Engulfing Pattern at Support</h2>
+<div id="engulfChart" class="chart"></div>
 
-<div id="engulfing" class="section">
-<h2>Bullish Engulfing Pattern</h2>
-
-<div id="engulfingChart" class="chart"></div>
-
-<p class="tag buy">BUY SIGNAL</p>
+<div class="infoBox blue">
+<h3>📖 What You're Seeing</h3>
+<ul>
+<li><b>Bullish Engulfing:</b> Two candle reversal pattern at end of downtrend</li>
+<li><b>First Candle:</b> Small bearish candle</li>
+<li><b>Second Candle:</b> Strong bullish candle engulfing previous candle</li>
+<li><b>Signal:</b> Buyers overpower sellers</li>
+</ul>
 </div>
 
-<!-- ================= BREAKOUT ================= -->
+<div class="infoBox purple">
+<h3>📈 Trading Setup</h3>
 
-<div id="breakout" class="section">
-<h2>Range Breakout Example</h2>
+<p><span class="badge buy">BUY</span> After engulfing candle closes</p>
+<p><b>Entry:</b> Break above engulf candle high</p>
+<p><b>Stop Loss:</b> Below engulf candle low</p>
+<p><b>Take Profit:</b> 1:2 Risk Reward</p>
 
+</div>
+
+<div class="infoBox green">
+<h3>✅ Why This Works</h3>
+<ul>
+<li>Momentum shift from sellers to buyers</li>
+<li>Shows strong institutional buying</li>
+<li>Often forms at support zones</li>
+</ul>
+</div>
+
+<div class="infoBox orange">
+<h3>⚠️ False Signals</h3>
+<ul>
+<li>Occurs in sideways market</li>
+<li>Weak candle body</li>
+<li>Low trading volume</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- ===================== DOUBLE BOTTOM ===================== -->
+
+<h2>Double Bottom Pattern</h2>
+<div id="doubleBottomChart" class="chart"></div>
+
+<div class="infoBox blue">
+<h3>📖 What You're Seeing</h3>
+<ul>
+<li>Two equal lows showing strong support</li>
+<li>Market fails to break support twice</li>
+<li>Indicates reversal potential</li>
+</ul>
+</div>
+
+<div class="infoBox purple">
+<h3>📈 Trading Setup</h3>
+
+<p><span class="badge buy">BUY</span> On neckline breakout</p>
+<p><b>Entry:</b> Above neckline resistance</p>
+<p><b>Stop Loss:</b> Below second bottom</p>
+<p><b>Take Profit:</b> Height of pattern projected upward</p>
+
+</div>
+
+<div class="infoBox green">
+<h3>✅ Why This Works</h3>
+<ul>
+<li>Shows seller exhaustion</li>
+<li>Strong support level confirmed</li>
+<li>Breakout attracts momentum traders</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- ===================== BREAKOUT ===================== -->
+
+<h2>Range Breakout</h2>
 <div id="breakoutChart" class="chart"></div>
 
-<p class="tag buy">BREAKOUT BUY</p>
+<div class="infoBox blue">
+<h3>📖 What You're Seeing</h3>
+<ul>
+<li>Market moving sideways inside support & resistance</li>
+<li>Strong breakout candle leaving range</li>
+</ul>
 </div>
 
-<!-- ================= TREND ================= -->
+<div class="infoBox purple">
+<h3>📈 Trading Setup</h3>
 
-<div id="trend" class="section">
-<h2>Trend Example</h2>
+<p><span class="badge buy">BUY</span> On breakout close</p>
+<p><b>Entry:</b> Above resistance level</p>
+<p><b>Stop Loss:</b> Inside range</p>
+<p><b>Take Profit:</b> Measured range expansion</p>
 
-<div id="trendChart" class="chart"></div>
+</div>
 
-<p class="tag buy">UPTREND</p>
+<div class="infoBox green">
+<h3>✅ Why This Works</h3>
+<ul>
+<li>Liquidity build up inside range</li>
+<li>Breakout triggers stop losses & new buyers</li>
+</ul>
 </div>
 
 </div>
 
 <script>
 
-/* ================= NAV SCROLL ================= */
+/* ===== REALISTIC FOREX DATA ===== */
 
-function scrollToSection(id){
-  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+function generateTrend(start,trend,count){
+
+let dates=[],open=[],high=[],low=[],close=[];
+let price=start;
+
+for(let i=0;i<count;i++){
+
+let move = trend + (Math.random()-0.5)*0.001;
+
+let newClose = price + move;
+
+dates.push(new Date(2024,0,i+1));
+open.push(price);
+close.push(newClose);
+high.push(Math.max(price,newClose)+0.0008);
+low.push(Math.min(price,newClose)-0.0008);
+
+price=newClose;
 }
 
-/* ================= DATA GENERATOR ================= */
-
-function generateCandles(count,startPrice){
-
-  let dates=[],open=[],high=[],low=[],close=[];
-  let price=startPrice;
-
-  for(let i=0;i<count;i++){
-
-    let change=(Math.random()-0.5)*0.003;
-    let newClose=price+change;
-
-    dates.push(new Date(2024,0,i+1));
-    open.push(price);
-    close.push(newClose);
-    high.push(Math.max(price,newClose)+0.001);
-    low.push(Math.min(price,newClose)-0.001);
-
-    price=newClose;
-  }
-
-  return {dates,open,high,low,close,price};
+return {dates,open,high,low,close,price};
 }
 
-/* ================= ENGULFING CHART ================= */
+/* ================= ENGULFING ================= */
 
-let engulf = generateCandles(35,1.1000);
+let engulf = generateTrend(1.100,-0.001,30);
 
-engulf.dates.push(new Date(2024,0,36));
+/* Bear candle */
+engulf.dates.push(new Date(2024,1,1));
 engulf.open.push(engulf.price);
-engulf.close.push(engulf.price-0.002);
-engulf.high.push(engulf.price+0.001);
-engulf.low.push(engulf.price-0.003);
-
-engulf.dates.push(new Date(2024,0,37));
-engulf.open.push(engulf.price-0.001);
-engulf.close.push(engulf.price+0.004);
-engulf.high.push(engulf.price+0.005);
+engulf.close.push(engulf.price-0.001);
+engulf.high.push(engulf.price+0.0005);
 engulf.low.push(engulf.price-0.002);
 
-Plotly.newPlot("engulfingChart",[{
-  x:engulf.dates,
-  open:engulf.open,
-  high:engulf.high,
-  low:engulf.low,
-  close:engulf.close,
-  type:"candlestick"
+/* Bull engulf */
+engulf.dates.push(new Date(2024,1,2));
+engulf.open.push(engulf.price-0.0005);
+engulf.close.push(engulf.price+0.003);
+engulf.high.push(engulf.price+0.004);
+engulf.low.push(engulf.price-0.001);
+
+Plotly.newPlot("engulfChart",[{
+x:engulf.dates,
+open:engulf.open,
+high:engulf.high,
+low:engulf.low,
+close:engulf.close,
+type:"candlestick"
 }],{xaxis:{rangeslider:{visible:false}}});
 
-/* ================= BREAKOUT CHART ================= */
+/* ================= DOUBLE BOTTOM ================= */
 
-let breakout = generateCandles(30,1.2000);
+let db = generateTrend(1.200,-0.001,20);
 
-/* Create sideways range */
+/* Bottom 1 */
+db.dates.push(new Date(2024,1,10));
+db.open.push(1.180);
+db.close.push(1.182);
+db.high.push(1.185);
+db.low.push(1.178);
+
+/* Pullback */
+db.dates.push(new Date(2024,1,12));
+db.open.push(1.185);
+db.close.push(1.190);
+db.high.push(1.192);
+db.low.push(1.184);
+
+/* Bottom 2 */
+db.dates.push(new Date(2024,1,14));
+db.open.push(1.182);
+db.close.push(1.183);
+db.high.push(1.186);
+db.low.push(1.179);
+
+/* Breakout */
+db.dates.push(new Date(2024,1,18));
+db.open.push(1.190);
+db.close.push(1.205);
+db.high.push(1.208);
+db.low.push(1.188);
+
+Plotly.newPlot("doubleBottomChart",[{
+x:db.dates,
+open:db.open,
+high:db.high,
+low:db.low,
+close:db.close,
+type:"candlestick"
+}],{xaxis:{rangeslider:{visible:false}}});
+
+/* ================= RANGE BREAKOUT ================= */
+
+let rb = generateTrend(1.300,0,15);
+
+/* Sideways range */
 for(let i=0;i<10;i++){
 
-  breakout.dates.push(new Date(2024,1,i+1));
-  breakout.open.push(1.205);
-  breakout.close.push(1.205+(Math.random()-0.5)*0.001);
-  breakout.high.push(1.207);
-  breakout.low.push(1.203);
+rb.dates.push(new Date(2024,2,i+1));
+rb.open.push(1.305);
+rb.close.push(1.305+(Math.random()-0.5)*0.0008);
+rb.high.push(1.308);
+rb.low.push(1.302);
 }
 
-/* Breakout candle */
-breakout.dates.push(new Date(2024,1,12));
-breakout.open.push(1.206);
-breakout.close.push(1.215);
-breakout.high.push(1.217);
-breakout.low.push(1.205);
+/* Breakout */
+rb.dates.push(new Date(2024,2,15));
+rb.open.push(1.307);
+rb.close.push(1.320);
+rb.high.push(1.323);
+rb.low.push(1.306);
 
 Plotly.newPlot("breakoutChart",[{
-  x:breakout.dates,
-  open:breakout.open,
-  high:breakout.high,
-  low:breakout.low,
-  close:breakout.close,
-  type:"candlestick"
-}],{xaxis:{rangeslider:{visible:false}}});
-
-/* ================= TREND CHART ================= */
-
-let trendDates=[],trendOpen=[],trendHigh=[],trendLow=[],trendClose=[];
-let price=1.050;
-
-for(let i=0;i<40;i++){
-
-  let change=0.001+Math.random()*0.001;
-  let newClose=price+change;
-
-  trendDates.push(new Date(2024,2,i+1));
-  trendOpen.push(price);
-  trendClose.push(newClose);
-  trendHigh.push(newClose+0.001);
-  trendLow.push(price-0.001);
-
-  price=newClose;
-}
-
-Plotly.newPlot("trendChart",[{
-  x:trendDates,
-  open:trendOpen,
-  high:trendHigh,
-  low:trendLow,
-  close:trendClose,
-  type:"candlestick"
+x:rb.dates,
+open:rb.open,
+high:rb.high,
+low:rb.low,
+close:rb.close,
+type:"candlestick"
 }],{xaxis:{rangeslider:{visible:false}}});
 
 </script>
